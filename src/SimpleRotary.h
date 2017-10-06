@@ -6,16 +6,13 @@
 // Purpose    : handle input from a rotary encoder
 // Repository : https://github.com/DennisB66/Simple-Control-Library-for-Arduino
 
-#ifndef _SIMPLE_ENCODER_H
-#define _SIMPLE_ENCODER_H
-
-#define PIN_D0_DEFAULT 2            // default pin for rotate D0
-#define PIN_D1_DEFAULT 3            // default pin for rotate D1
+#ifndef _SIMPLE_ROTARY_H
+#define _SIMPLE_ROTARY_H
 
 class SimpleRotary
 {
 public:
-  SimpleRotary( int = PIN_D0_DEFAULT, int = PIN_D1_DEFAULT);
+  SimpleRotary( int, int);
 
   static void handle();
 
