@@ -1,7 +1,7 @@
 {
   "name": "Simple-Control-Library-for-Arduino",
   "keywords": "rotary",
-  "description": "Library for controlling an Arduino with buttons, rotary encoders, etc.",
+  "description": "Library for scheduler based controlling an Arduino with buttons, rotary encoders, etc.",
   "repository":
   {
     "type": "git",
