@@ -1,0 +1,22 @@
+{
+  "name": "Simple-Control-Library-for-Arduino",
+  "keywords": "rotary",
+  "description": "Library for controlling an Arduino with buttons, rotary encoders, etc.",
+  "repository":
+  {
+    "type": "git",
+    "url": ""
+  },
+  "authors":
+  [
+    {
+      "name": "Dennis Buis",
+      "email": "dennis.buis@gmail.com",
+      "url": "",
+      "maintainer": true
+    }
+  ],
+  "version": "0.3",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
