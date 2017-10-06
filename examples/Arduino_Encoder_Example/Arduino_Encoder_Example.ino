@@ -1,21 +1,23 @@
 #include <Arduino.h>
 #include "SimpleEncoder.h"
 
-RotaryEncoder encoder( PIN_D0_DEFAULT, PIN_D1_DEFAULT, PIN_D2_DEFAULT)
+SimpleRotary rotary( A1, A2);
+SimpleButton button( A0);
 
 void setup() {
-  Serial.begin  ( 9600);
-  Serial.println("Ready for encoder reading");  // ready for looping
+  Serial.begin( 9600);
+  
+  Serial.println( "# ready for encoder reading"); // ready for looping
 }
 
 void loop(){
 
-  if ( encoder.rotated()) {                     // check on new value for rotation
-    Serial.print  ( "Encoder Value = ");
+  if ( rotary.changed()) {                     // check on new value for rotation
+    Serial.print  ( "# encoder value = ");
     Serial.println( encoder.getCount());
   }
 
-  if ( encoder.pressed()) {                     // check on new value for press
-    Serial.println( "Encoder Press");
+  if ( button.pressed()) {                     // check on new value for press
+    Serial.println( "# button pressed");
   }
 }

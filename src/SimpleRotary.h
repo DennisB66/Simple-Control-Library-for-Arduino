@@ -9,13 +9,10 @@
 #ifndef _SIMPLE_ENCODER_H
 #define _SIMPLE_ENCODER_H
 
-#define PIN_D0_DEFAULT 2            // default pin for rotate D0
-#define PIN_D1_DEFAULT 3            // default pin for rotate D1
-
 class SimpleRotary
 {
 public:
-  SimpleRotary( int = PIN_D0_DEFAULT, int = PIN_D1_DEFAULT);
+  SimpleRotary( int, int);
 
   static void handle();
 
