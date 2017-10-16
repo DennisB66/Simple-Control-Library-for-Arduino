@@ -10,9 +10,12 @@
 #define _SIMPLE_BUTTON_H
 
 #include <Arduino.h>
+#include "SimpleDevice.h"
+
+#define BUTTON_MAX              4
 
 #define BUTTON_BOUNCE_DELAY    25       // min. time to filter contact bouncing (msec)
-#define BUTTON_DOUBLE_DELAY   400       // max. time between double clicks      (msec)
+#define BUTTON_DOUBLE_DELAY   300       // max. time between double clicks      (msec)
 #define BUTTON_REPEAT_DELAY  1000       // min. time before repeat activation   (msec)
 #define BUTTON_REPEAT_SPEED   100       // min. time between repeated clicks    (msec)
 
@@ -29,28 +32,32 @@
 #define BUTTON_NORMAL           1       // normal click
 #define BUTTON_DOUBLE           2       // double click
 #define BUTTON_HOLD             3       // button click & hold
+#define BUTTON_REPEAT           4       // button repeat
 
-class SimpleButton
+class SimpleButton : public SimpleDevice
 {
 public:
-  SimpleButton( int, bool = true);      // constructor
-
-  static void handle();                 // handle button actions
+  SimpleButton( int, byte = BUTTON_HOLD);// constructor
 
   byte available();                     // return available clicks in buffering
   byte read();                          // read oldest click from buffer
   byte lastValue();                     // return last read click value
 
 private:
-  static byte _pin;                     // connected pin
-  static bool _repeatMode;              // true = activates click repeat
-  static byte _curr;                    // last read click value
-  static byte _last;                    // first available click value in buffer
-  static byte _next;                    // first free position in buffer
-  static byte _buffer[ BUTTON_BUFFER_LENGTH];
-                                        // click value (ring) buffer
-  static void _addNextClick( byte);     // add (newest) click value to buffer
-  static byte _getNextClick();          // get (oldest) click value from buffer
+  byte _pinD;                           // connected pin
+  byte _mode;                           // true = activates click repeat
+  byte _curr;                           // last read click value
+  byte _last;                           // first available click value in buffer
+  byte _next;                           // first free position in buffer
+  byte _buffer[ BUTTON_BUFFER_LENGTH];  // click value (ring) buffer
+
+  byte           _state;       // state for state engine
+  unsigned long _ticks;                    // stopwatch for current  click
+  unsigned long _count;                          // number of unprocessed clicks
+
+  virtual void _handleDevice();
+  void         _addNextClick( byte);     // add (newest) click value to buffer
+  byte         _getNextClick();          // get (oldest) click value from buffer
 };
 
 #endif
