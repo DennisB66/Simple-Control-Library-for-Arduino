@@ -38,11 +38,13 @@ public:
   void attachHandler( TaskHandler, int = 0);
   void detachhandler();
 
+  void begin();
+
   void start();
   void stop();
 
   void print();
-  
+
 private:
   static SimpleTask* _rootSimpleTaskList;
   int                _count;

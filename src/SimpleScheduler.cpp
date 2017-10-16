@@ -9,6 +9,7 @@
 #include <Arduino.h>
 #include "TimerOne.h"
 #include "SimpleScheduler.h"
+#include "SimpleDevice.h"
 
 SimpleTask* SimpleScheduler::_rootSimpleTaskList = nullptr;
 
@@ -18,7 +19,6 @@ SimpleTask::SimpleTask( TaskHandler func, int freq)
   _freq            = freq;
   _nextTask        = nullptr;
 }
-
 
 TaskHandler SimpleTask::getTaskHandler()
 {
@@ -49,6 +49,23 @@ SimpleScheduler::SimpleScheduler( long t)
   _rootSimpleTaskList = nullptr;
 }
 
+void SimpleScheduler::begin()
+{
+  attachHandler( SimpleDevice::handle);
+
+  start();
+}
+
+void SimpleScheduler::start()
+{
+  Timer1.attachInterrupt( _handle);
+}
+
+void SimpleScheduler::stop()
+{
+  Timer1.detachInterrupt();
+}
+
 void SimpleScheduler::attachHandler( TaskHandler func, int freq)
 {
   SimpleTask* task = new SimpleTask( func, freq);
@@ -64,16 +81,6 @@ void SimpleScheduler::attachHandler( TaskHandler func, int freq)
 
     last->setNextTask( task);
   }
-}
-
-void SimpleScheduler::start()
-{
-  Timer1.attachInterrupt( _handle);
-}
-
-void SimpleScheduler::stop()
-{
-  Timer1.detachInterrupt();
 }
 
 void SimpleScheduler::print()

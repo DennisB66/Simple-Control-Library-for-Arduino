@@ -9,12 +9,12 @@
 #ifndef _SIMPLE_ROTARY_H
 #define _SIMPLE_ROTARY_H
 
-class SimpleRotary
+#include "SimpleDevice.h"
+
+class SimpleRotary : public SimpleDevice
 {
 public:
   SimpleRotary( int, int);
-
-  static void handle();
 
   bool changed();
   int  position();
@@ -24,16 +24,18 @@ public:
   void setMinMax( int, int, int, bool = false);
 
 private:
-  static int _pinD0;                  // pin for rotate line D0 (must be 2 on Arduino Uno)
-  static int _pinD1;                  // pin for rotate line D1 (must be 3 on Arduino Uno)
+  int _pinD0;                  // pin for rotate line D0 (must be 2 on Arduino Uno)
+  int _pinD1;                  // pin for rotate line D1 (must be 3 on Arduino Uno)
 
-  static volatile int   _pos;         // encoder count value
-  static volatile int   _posMin;      // encoder count minimal value
-  static volatile int   _posMax;      // encoder count maxiaml value
-  static volatile int   _posInc;
-  static volatile bool  _loop;        // encoder count loop indicator
+  int  _pos;         // encoder count value
+  int  _posMin;      // encoder count minimal value
+  int  _posMax;      // encoder count maxiaml value
+  int  _posInc;
+  bool _loop;        // encoder count loop indicator
 
-  static void _pulseDetect();
+  byte _last;
+
+  virtual void _handleDevice();
 };
 
 #endif
