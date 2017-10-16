@@ -4,6 +4,7 @@
 #include "SimpleButton.h"
 
 SimpleScheduler scheduler( 1000);
+
 SimpleRotary    rotary( A1, A2);
 SimpleButton    button( A0, false);
 
