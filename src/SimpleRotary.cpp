@@ -15,7 +15,7 @@ SimpleRotary::SimpleRotary( int pinD0, int pinD1) : SimpleDevice()
   pinMode( _pinD0 = pinD0, INPUT_PULLUP); // line D0 = encoder rotate (-)
   pinMode( _pinD1 = pinD1, INPUT_PULLUP); // line D1 = encoder rotate (+)
 
-  _last   = 0;
+  _bits   = 0;
   _posInc = 1;
   // noInterrupts();
   // attachInterrupt( digitalPinToInterrupt( _pinD0), _pulseDetect, RISING);
@@ -34,10 +34,8 @@ SimpleRotary::SimpleRotary( int pinD0, int pinD1) : SimpleDevice()
 
 bool SimpleRotary::changed()
 {
-  static int pos;                       // last encoderCount value
-
-  if ( pos != _pos) {                 // if  new value
-    pos = _pos;                       // set new value
+  if ( _prv != _pos) {                 // if  new value
+    _prv = _pos;                       // set new value
 
     return true;                          // success:    new value available
   } else {
@@ -61,6 +59,8 @@ void SimpleRotary::setPosition( int pos)
     _pos = ( _loop) ? _posMin : _posMax;
   }
 
+  _prv = _pos;
+
   changed();
 }
 
@@ -82,19 +82,21 @@ void SimpleRotary::setMinMax( int min, int max, int inc, bool loop)
     _posInc = -inc;
     _loop   =  loop;
   }
+
+  setPosition( _pos);
 }
 
 void SimpleRotary::_handleDevice()
 {
- _last |= ( digitalRead( _pinD0) << 2) | ( digitalRead( _pinD1) << 3);
+ _bits |= ( digitalRead( _pinD0) << 2) | ( digitalRead( _pinD1) << 3);
 
-  //if (( _last == 0b1101) || ( _last == 0b0100) || ( _last == 0b0010) || ( _last == 0b1011)) {}
-  //if (( _last == 0b1110) || ( _last == 0b0111) || ( _last == 0b0001) || ( _last == 0b1000)) {}
+  //if (( _bits == 0b1101) || ( _bits == 0b0100) || ( _bits == 0b0010) || ( _bits == 0b1011)) {}
+  //if (( _bits == 0b1110) || ( _bits == 0b0111) || ( _bits == 0b0001) || ( _bits == 0b1000)) {}
 
-  _pos += ( _posInc * ( _last == 0b1101));
-  _pos -= ( _posInc * ( _last == 0b1110));
+  _pos += ( _posInc * ( _bits == 0b1101));
+  _pos -= ( _posInc * ( _bits == 0b1110));
 
-  _last >>= 2;                                              // move current values for pinD0/pinD1 to bits 1/2
+  _bits >>= 2;                                              // move current values for pinD0/pinD1 to bits 1/2
 
   if ( _pos < _posMin) {
     _pos = ( _loop) ? _posMax : _posMin;

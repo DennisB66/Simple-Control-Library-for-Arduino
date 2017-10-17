@@ -38,8 +38,6 @@ public:
   void attachHandler( TaskHandler, int = 0);
   void detachhandler();
 
-  void begin();
-
   void start();
   void stop();
 

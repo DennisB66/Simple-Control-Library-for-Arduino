@@ -47,12 +47,8 @@ SimpleScheduler::SimpleScheduler( long t)
   Timer1.initialize( t);
 
   _rootSimpleTaskList = nullptr;
-}
 
-void SimpleScheduler::begin()
-{
   attachHandler( SimpleDevice::handle);
-
   start();
 }
 

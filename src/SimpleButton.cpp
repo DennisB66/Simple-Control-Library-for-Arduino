@@ -89,13 +89,19 @@ void SimpleButton::_handleDevice()                          // simple state engi
       break;
     }
   } else {                                                  // button is released (potential double click)
-    if ( _count  && ( millis() - _ticks > BUTTON_DOUBLE_DELAY)) {
+    switch ( _state) {
+    case BUTTON_CHECK_BOUNCING:
+      break;
+    default:
+      if ( _count  && ( millis() - _ticks > BUTTON_DOUBLE_DELAY)) {
                                                             // provide extra time to check double clicks
-      _addNextClick(( _count == 1) ? BUTTON_NORMAL : BUTTON_DOUBLE);
+        _addNextClick(( _count == 1) ? BUTTON_NORMAL : BUTTON_DOUBLE);
                                                             // insert click in buffer
-      _count = 0;                                            // reset unprocessed clicks
-    };
-    _state = BUTTON_WAIT_FOR_CLICK;                          // reset state engine
+        _count = 0;                                            // reset unprocessed clicks
+      };
+      _state = BUTTON_WAIT_FOR_CLICK;                          // reset state engine
+      break;
+    }
   }
 }
 
