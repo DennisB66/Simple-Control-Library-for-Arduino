@@ -46,6 +46,20 @@ void loop()
     }
   }
 
+  if ( button1.available()) {                     // check on new value for press
+    switch( button1.read()) {
+      case BUTTON_NORMAL:
+      Serial.println( "# button 1 normal click");
+      break;
+      case BUTTON_DOUBLE:
+      Serial.println( "# button 1 double click");
+      break;
+      case BUTTON_HOLD:
+      Serial.println( "# button 1 click & hold");
+      break;
+    }
+  }
+
   if ( button2.available()) {                     // check on new value for press
     switch( button2.read()) {
       case BUTTON_NORMAL:
