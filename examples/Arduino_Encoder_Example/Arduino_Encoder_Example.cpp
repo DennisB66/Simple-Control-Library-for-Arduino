@@ -4,8 +4,13 @@
 #include "SimpleButton.h"
 
 SimpleScheduler scheduler( 5000);
+<<<<<<< HEAD:examples/Arduino_Encoder_Example/Arduino_Encoder_Example.cpp
 SimpleRotary    rotary1( A2, A1);
 SimpleRotary    rotary2( A5, A4);
+=======
+SimpleRotary    rotary1( A1, A2);
+SimpleRotary    rotary2( A4, A5);
+>>>>>>> 3bda04c2cfb2c69fe52bdebb7eee5048b39a7720:src/Arduino_Encoder_Example.cpp
 SimpleButton    button1( A0, false);
 SimpleButton    button2( A3, false);
 
@@ -14,6 +19,11 @@ void setup() {
 
   rotary1.setMinMax( -3, 3);
   rotary2.setMinMax(  1, 6, true);
+<<<<<<< HEAD:examples/Arduino_Encoder_Example/Arduino_Encoder_Example.cpp
+=======
+
+  scheduler.begin();
+>>>>>>> 3bda04c2cfb2c69fe52bdebb7eee5048b39a7720:src/Arduino_Encoder_Example.cpp
 
   Serial.println( "# ready for encoder reading"); // ready for looping
 }
@@ -21,7 +31,11 @@ void setup() {
 void loop()
 {
   if ( rotary1.changed()) {                     // check on new value for rotation
+<<<<<<< HEAD:examples/Arduino_Encoder_Example/Arduino_Encoder_Example.cpp
     Serial.print  ( "# encoder 1 value = ");
+=======
+    Serial.print  ( "# encoder value = ");
+>>>>>>> 3bda04c2cfb2c69fe52bdebb7eee5048b39a7720:src/Arduino_Encoder_Example.cpp
     Serial.println( rotary1.position());
   }
 
