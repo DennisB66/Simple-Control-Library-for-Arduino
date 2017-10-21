@@ -4,8 +4,8 @@
 #include "SimpleButton.h"
 
 SimpleScheduler scheduler( 5000);
-SimpleRotary    rotary1( A2, A1);
-SimpleRotary    rotary2( A5, A4);
+SimpleRotary    rotary1( A1, A2);
+SimpleRotary    rotary2( A4, A5);
 SimpleButton    button1( A0, false);
 SimpleButton    button2( A3, false);
 

@@ -88,7 +88,7 @@ void SimpleRotary::setMinMax( int min, int max, int inc, bool loop)
 
 void SimpleRotary::_handleDevice()
 {
- _bits |= ( digitalRead( _pinD0) << 2) | ( digitalRead( _pinD1) << 3);
+ _bits |= ( digitalRead( _pinD0) << 3) | ( digitalRead( _pinD1) << 2);
 
   //if (( _bits == 0b1101) || ( _bits == 0b0100) || ( _bits == 0b0010) || ( _bits == 0b1011)) {}
   //if (( _bits == 0b1110) || ( _bits == 0b0111) || ( _bits == 0b0001) || ( _bits == 0b1000)) {}
