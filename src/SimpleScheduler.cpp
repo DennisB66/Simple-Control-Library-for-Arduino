@@ -7,105 +7,62 @@
 // Repository : https://github.com/DennisB66/Simple-Control-Library-for-Arduino
 
 #include <Arduino.h>
-#include "TimerOne.h"
 #include "SimpleScheduler.h"
 #include "SimpleDevice.h"
+#include "SimpleUtils.h"
 
-SimpleTask* SimpleScheduler::_rootSimpleTaskList = nullptr;
+#if defined(ESP8266)
+extern "C" {
+#include "user_interface.h"
+}
+os_timer_t myTimer;
+#else
+#include "TimerOne.h"
+#endif
 
-SimpleTask::SimpleTask( TaskHandler func, int freq)
+SimpleSchedulerTask::SimpleSchedulerTask( TaskFunc func)
+: SimpleTask( func)
 {
-  _thisTaskHandler = func;
-  _freq            = freq;
-  _nextTask        = nullptr;
 }
 
-TaskHandler SimpleTask::getTaskHandler()
+SimpleScheduler::SimpleScheduler( unsigned long msec)
+: SimpleTaskList()
 {
-  return _thisTaskHandler;
-}
+  _msec = _max( 1, msec);
 
-void SimpleTask::setTaskHandler( TaskHandler func)
-{
-  _thisTaskHandler = func;
-}
-
-void SimpleTask::setNextTask( SimpleTask* task)
-{
-  _nextTask = task;
-}
-
-SimpleTask* SimpleTask::getNextTask()
-{
-  return _nextTask;
-}
-
-/****************************************************************************/
-
-SimpleScheduler::SimpleScheduler( long t)
-{
-  Timer1.initialize( t);
-
-  _rootSimpleTaskList = nullptr;
+#if defined(ESP8266)
+  os_timer_disarm( &myTimer);
+  os_timer_setfn ( &myTimer, _handle, NULL);
+  //os_timer_arm   ( &Timer1, _msec  , true);
+#else
+  Timer1.initialize( _msec * 1000);
+#endif
 
   attachHandler( SimpleDevice::handle);
-  start();
+  //start();
+}
+
+void SimpleScheduler::attachHandler( TaskFunc func)
+{
+  SimpleSchedulerTask* task = new SimpleSchedulerTask( func);
+
+  _attach( task);
 }
 
 void SimpleScheduler::start()
 {
+#if defined(ESP8266)
+  os_timer_arm( &myTimer, _msec, true);
+#else
   Timer1.attachInterrupt( _handle);
+#endif
 }
 
 void SimpleScheduler::stop()
 {
+#if defined(ESP8266)
+  os_timer_disarm( &myTimer);
+#else
   Timer1.detachInterrupt();
-}
-
-void SimpleScheduler::attachHandler( TaskHandler func, int freq)
-{
-  SimpleTask* task = new SimpleTask( func, freq);
-  SimpleTask* last = _rootSimpleTaskList;
-
-  if ( last == nullptr) {
-    _rootSimpleTaskList = task;
-  } else {
-    while ( last->getNextTask() != nullptr) {
-
-      last = last->getNextTask();
-    }
-
-    last->setNextTask( task);
-  }
-}
-
-void SimpleScheduler::print()
-{
-  SimpleTask* next = _rootSimpleTaskList;
-  int         step = 0;
-
-  Serial.print  ( F( "print start"));
-  while ( next != nullptr) {
-    Serial.print( F( "/step "));
-    Serial.print(  step++);
-    next = next->getNextTask();
-  }
-  Serial.println( F( "/stop"));
-}
-
-
-void SimpleScheduler::_handle()
-{
-  SimpleTask* next = _rootSimpleTaskList;
-  TaskHandler task;
-
-  //Serial.print  ("handle start");
-  while ( next != nullptr) {
-    //Serial.print("/step ");
-    //Serial.print(  step++);
-    task = next->getTaskHandler();
-    ( *task)();
-    next = next->getNextTask();
-  }
-  //Serial.println("/stop");
+#endif
 }

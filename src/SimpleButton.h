@@ -51,13 +51,13 @@ private:
   byte _next;                           // first free position in buffer
   byte _buffer[ BUTTON_BUFFER_LENGTH];  // click value (ring) buffer
 
-  byte           _state;       // state for state engine
-  unsigned long _ticks;                    // stopwatch for current  click
-  unsigned long _count;                          // number of unprocessed clicks
+  byte           _state;                // state for state engine
+  unsigned long _ticks;                 // timer for current  click
+  unsigned long _count;                 // number of unprocessed clicks
 
   virtual void _handleDevice();
-  void         _addNextClick( byte);     // add (newest) click value to buffer
-  byte         _getNextClick();          // get (oldest) click value from buffer
+  void         _addNextClick( byte);    // add (newest) click value to buffer
+  byte         _getNextClick();         // get (oldest) click value from buffer
 };
 
 #endif

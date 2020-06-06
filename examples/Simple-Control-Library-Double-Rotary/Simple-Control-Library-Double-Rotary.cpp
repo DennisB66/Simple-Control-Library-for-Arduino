@@ -26,9 +26,9 @@ void loop()
   }
 
   if ( rotary2.changed()) {                     // check on new value for rotation
-      Serial.print  ( "# encoder 2 value = ");
-      Serial.println( rotary2.position());
-    }
+    Serial.print  ( "# encoder 2 value = ");
+    Serial.println( rotary2.position());
+  }
 
   if ( button1.available()) {                     // check on new value for press
     switch( button1.read()) {
