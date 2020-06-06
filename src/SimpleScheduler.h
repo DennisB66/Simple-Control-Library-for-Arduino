@@ -9,45 +9,26 @@
 #ifndef _SIMPLE_SCHEDULER_H
 #define _SIMPLE_SCHEDULER_H
 
-typedef void ( *TaskHandler)();
+#include "SimpleTask.h"
 
-class SimpleTask
+class SimpleSchedulerTask : public SimpleTask
 {
 public:
-  SimpleTask( TaskHandler, int = 1);
-
-  void        setTaskHandler( TaskHandler);
-  TaskHandler getTaskHandler();
-
-  void        setNextTask( SimpleTask*);
-  SimpleTask* getNextTask();
-
-private:
-  TaskHandler _thisTaskHandler;
-  int         _freq;
-  SimpleTask* _nextTask;
+  SimpleSchedulerTask( TaskFunc);
 };
 
-#include <TimerOne.h>
-
-class SimpleScheduler
+class SimpleScheduler : public SimpleTaskList
 {
 public:
-  SimpleScheduler( long = 5000000);
+  SimpleScheduler( unsigned long = 1);
 
-  void attachHandler( TaskHandler, int = 0);
-  void detachhandler();
+  virtual void attachHandler( TaskFunc);
 
   void start();
   void stop();
 
-  void print();
-  
-private:
-  static SimpleTask* _rootSimpleTaskList;
-  int                _count;
-
-  static void _handle();
+protected:
+  unsigned long _msec;
 };
 
 #endif
