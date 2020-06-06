@@ -1,2 +1,2 @@
 # Simple-Control-Library-for-Arduino
-Library for (scheduler based) controlling an Arduino with buttons, rotary encoders, etc.
+Library for task scheduling an Arduino controlled by buttons, rotary encoders, etc.
