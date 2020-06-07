@@ -10,8 +10,11 @@
 #define _SIMPLE_DEVICE_H
 
 #include <Arduino.h>
+#include "SimpleScheduler.h"
 
 #define MAX_DEVICES             8
+
+// #define SIMPLE_DEVICE_LIST(T)  SimpleScheduler scheduler( T, SimpleDevice::handle);
 
 class SimpleDevice
 {
@@ -26,6 +29,12 @@ protected:
   int                  _deviceEntry;
 
   virtual void _handleDevice();
+};
+
+class SimpleDeviceHandler : public SimpleScheduler
+{
+public:
+  SimpleDeviceHandler( unsigned long);
 };
 
 #endif

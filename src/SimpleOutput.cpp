@@ -75,6 +75,8 @@ void SimpleOutput::stop()
 
 void SimpleOutput::_handleDevice()
 {
+  // Serial.print("*");
+
   if ( _patternStepping && _timer.check()) {
     if ( _pattern & ((unsigned long) 1 << (_patternCount - _patternIndex - 1))) {
       _nextState = ( _initState == OUTPUT_OFF) ? OUTPUT_ON : OUTPUT_OFF;

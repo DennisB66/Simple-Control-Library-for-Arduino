@@ -7,7 +7,7 @@
 // Repository : https://github.com/DennisB66/Simple-Control-Library-for-Arduino
 
 #include "SimpleDevice.h"
-#include "SimplePrint.h"
+// #include "SimplePrint.h"
 
 SimpleDevice* SimpleDevice::_device[ MAX_DEVICES] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 int           SimpleDevice::_deviceCount = 0;
@@ -29,5 +29,11 @@ void SimpleDevice::handle()
 
 void SimpleDevice::_handleDevice()                          // device logic
 {
+  // virtual function
+}
 
+SimpleDeviceHandler::SimpleDeviceHandler( unsigned long msec) : SimpleScheduler( msec)
+{
+  attachHandler( SimpleDevice::handle);
+  start();
 }

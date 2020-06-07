@@ -34,12 +34,12 @@ SimpleRotary::SimpleRotary( int pinD0, int pinD1) : SimpleDevice()
 
 bool SimpleRotary::changed()
 {
-  if ( _prv != _pos) {                 // if  new value
-    _prv = _pos;                       // set new value
+  if ( _prv != _pos) {                                      // if  new value
+    _prv = _pos;                                            // set new value
 
-    return true;                          // success:    new value available
+    return true;                                            // success: new value
   } else {
-    return false;                         // failure: no new value available
+    return false;                                           // failure: no change
   }
 }
 
