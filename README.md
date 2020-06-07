@@ -28,7 +28,7 @@ void stop()     // stop  output pattern sequence
 
 ## Library Dependencies
 
-- https://github.com/DennisB66/Simple-Utility-Library-for-Arduino
+- https://github.com/DennisB66/Simple-Scheduler-Library-for-Arduino
 
 Version history:
 ```
