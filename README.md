@@ -5,18 +5,18 @@ Library for operating an Arduino or ESP8266 controlled by buttons, rotary encode
 
 The functions in the library include:
 ```
-SimpleButton    // button constructor
+SimpleButton    // button constructor (1 pin)
 available()     // return available clicks in buffering
 read()          // read next click value from buffer
 lastValue()     // return last read click value
 
-SimpleRotary    // rotary constructor
+SimpleRotary    // rotary constructor (2 pin)
 setMinMax()     // set rotary position value boundaries
 setPosition()   // set rotary position
 changed()       // true = rotary value has changed
 position()      // read current rotary position
 
-SimpleOutput    // pattern based output pin
+SimpleOutput    // output constructor (1 pin)
 on()            // activate output
 off()           // deactivate output
 toggle()        // toggle output
