@@ -1,11 +1,11 @@
 {
   "name": "Simple-Control-Library-for-Arduino",
-  "keywords": "rotary",
+  "keywords": "button, rotary, task scheduler",
   "description": "Library for scheduler based controlling an Arduino with buttons, rotary encoders, etc.",
   "repository":
   {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/DennisB66/Simple-Control-Library-for-Arduino.git"
   },
   "authors":
   [
@@ -16,7 +16,14 @@
       "maintainer": true
     }
   ],
-  "version": "0.3",
+  "dependencies": [
+    {
+      "name": "TimerOne",
+      "authors": "Paul Stoffregen",
+      "frameworks": "arduino"
+    }
+  ],
+  "version": "0.4",
   "frameworks": "arduino",
   "platforms": "*"
 }
