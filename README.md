@@ -33,4 +33,4 @@ void stop()     // stop  output pattern sequence
 Version history:
 ```
 0.1             // initial version
-0.11            // some cleanup
+0.4             // move schedular to a seperate library
