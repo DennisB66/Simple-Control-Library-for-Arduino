@@ -3,7 +3,7 @@ Library for operating an Arduino or ESP8266 controlled by buttons, rotary encode
 
 ## Functionality
 
-The functions in the class SimpleScheduler include:
+The functions in the library include:
 ```
 SimpleButton    // button constructor
 available()     // return available clicks in buffering
@@ -32,5 +32,5 @@ void stop()     // stop  output pattern sequence
 
 Version history:
 ```
-0.1             // initial version
-0.4             // move schedular to a seperate library
+0.4             // initial published version
+0.5             // move task schedular to a seperate library
