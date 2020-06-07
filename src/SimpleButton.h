@@ -1,9 +1,9 @@
-// Copyright  : Dennis Buis (2017)
+// Copyright  : Dennis Buis (2017,2020)
 // License    : MIT
 // Platform   : Arduino
 // Library    : Simple Control Library for Arduino
 // File       : SimpleButton.h
-// Purpose    : Receiving input from buttons (incuding auto-repeat)
+// Purpose    : Handle input from buttons (incuding auto-repeat)
 // Repository : https://github.com/DennisB66/Simple-Control-Library-for-Arduino
 
 #ifndef _SIMPLE_BUTTON_H

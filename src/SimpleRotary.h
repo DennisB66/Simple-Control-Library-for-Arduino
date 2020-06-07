@@ -1,9 +1,9 @@
-// Copyright  : Dennis Buis (2017)
+// Copyright  : Dennis Buis (2017,2020)
 // License    : MIT
 // Platform   : Arduino
 // Library    : Simple Control Library for Arduino
 // File       : SimpleRotary.h
-// Purpose    : handle input from a rotary encoder
+// Purpose    : Handle input from a rotary encoder
 // Repository : https://github.com/DennisB66/Simple-Control-Library-for-Arduino
 
 #ifndef _SIMPLE_ROTARY_H

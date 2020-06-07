@@ -1,9 +1,9 @@
-// Copyright  : Dennis Buis (2017)
+// Copyright  : Dennis Buis (2017,2020)
 // License    : MIT
 // Platform   : Arduino
 // Library    : Simple Control Library for Arduino
 // File       : SimpleOutput.h
-// Purpose    : Controling Digital Output
+// Purpose    : pattern based pin output
 // Repository : https://github.com/DennisB66/Simple-Control-Library-for-Arduino
 
 #ifndef _SIMPLE_OUTPUT_H
