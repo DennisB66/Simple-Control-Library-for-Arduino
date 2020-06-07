@@ -15,14 +15,7 @@
       "maintainer": true
     }
   ],
-  "dependencies": [
-    {
-      "name": "TimerOne",
-      "authors": "Paul Stoffregen",
-      "frameworks": "arduino"
-    }
-  ],
-  "version": "0.4",
+  "version": "0.5",
   "frameworks": "arduino",
   "platforms": "*"
 }
