@@ -16,6 +16,7 @@
       "maintainer": true
     }
   ],
+<<<<<<< HEAD
   "dependencies": [
     {
       "name": "TimerOne",
@@ -23,6 +24,8 @@
       "frameworks": "arduino"
     }
   ],
+=======
+>>>>>>> bd6a6862f93706faf3fa6b9d928ba056e783f29d
   "version": "0.4",
   "frameworks": "arduino",
   "platforms": "*"
